@@ -1,0 +1,207 @@
+<!-- <!DOCTYPE html>
+<html>
+
+<head>
+    <title>Prediction</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-transform: capitalize;
+        }
+
+        body {
+            display: grid;
+            place-content: center;
+            width: 100%;
+            height: 100vh;
+        }
+
+        body p {
+            text-align: center;
+            font-size: 65px;
+            font-style: italic;
+        }
+
+        .box {
+            width: 800px;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            margin-top: 20px;
+        }
+
+        .container button {
+            width: 80px;
+            height: 35px;
+            border-radius: 10px;
+            margin-left: 10px;
+            border: none;
+        }
+
+        .container input {
+            width: 400px;
+            height: 80px;
+            border-radius: 10px;
+            border: none;
+            padding-left: 10px;
+        }
+
+        .container h2 {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .container h4 {
+            margin-left: 10px;
+            margin-bottom: 5px;
+        }
+    </style>
+    <script>
+        function submitForm(event) {
+            event.preventDefault(); // Prevent form submission
+            var formData = new FormData(event.target);
+            var text = formData.get("text");
+
+            // Make an AJAX request to the server
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var prediction = xhr.responseText;
+                    displayPrediction(prediction);
+                }
+            };
+            xhr.open("POST", "{{ url_for('get_prediction') }}", true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.send("text=" + encodeURIComponent(text));
+        }
+
+        function displayPrediction(prediction) {
+            var resultContainer = document.getElementById("predictionResult");
+            resultContainer.innerHTML = "<p>" + prediction + "</p>";
+        }
+    </script>
+</head>
+
+<body>
+    <p>Fake News Prediction </p>
+    <form onsubmit="submitForm(event)">
+        <textarea name="text" rows="4" cols="50"></textarea>
+        <br>
+        <input type="submit" value="Predict">
+    </form>
+    <h2>Prediction Result:</h2>
+    <div id="predictionResult"></div>
+</body>
+
+</html> -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Prediction</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-transform: capitalize;
+        }
+
+        body {
+            display: grid;
+            place-content: center;
+            width: 100%;
+            height: 100vh;
+            background-color: rgb(96 165 250);
+        }
+
+        body p {
+            text-align: center;
+            font-size: 65px;
+            font-style: italic;
+        }
+
+        .container {
+            position: relative;
+            width: 400px;
+            height: 280px;
+            margin: 50px auto;
+            border: 1px solid #ccc;
+            overflow: auto;
+            border-radius: 10px;
+        }
+
+        #fixed-textarea {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            outline: none;
+            resize: none;
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        .centered-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 5px;
+        }
+
+        #center-button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        #resultss{margin-left: 40px;}
+    </style>
+    <script>
+        function submitForm(event) {
+            event.preventDefault(); // Prevent form submission
+            var formData = new FormData(event.target);
+            var text = formData.get("text");
+
+            // Make an AJAX request to the server
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var prediction = xhr.responseText;
+                    displayPrediction(prediction);
+                }
+            };
+            xhr.open("POST", "{{ url_for('get_prediction') }}", true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.send("text=" + encodeURIComponent(text));
+        }
+
+        function displayPrediction(prediction) {
+            var resultContainer = document.getElementById("predictionResult");
+            resultContainer.innerHTML = "<p>" + prediction + "</p>";
+        }
+    </script>
+</head>
+
+<body>
+    <p>Fake News Prediction </p>
+    <form onsubmit="submitForm(event)">
+        <div class="container">
+            <textarea id="fixed-textarea" name="text" rows="4" cols="50"></textarea>
+        </div>
+        <div class="centered-button">
+            <button id="center-button" type="submit" value="Predict">Predict</button>
+        </div>
+    </form>
+    <h2 id="resultss">Prediction Result:</h2>
+    <div id="predictionResult"></div>
+</body>
+
+</html>
